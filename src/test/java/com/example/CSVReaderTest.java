@@ -1,20 +1,31 @@
 package com.example;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
 
 public class CSVReaderTest {
 
     @Test
-    public void testReadAll() throws Exception {
-        CSVReader reader = new CSVReader();
-        List<Person> people = reader.readAll("data.csv");
+    public void testReadAllReturnsCorrectSize() throws Exception {
+        CSVReader r = new CSVReader();
+        List<Person> list = r.readAll("data.csv");  
+        assertEquals(2, list.size()); // حسب ملف data.csv الحالي
+    }
 
-        assertNotNull(people);
-        assertTrue(people.size() >= 2);
+    @Test
+    public void testReadAllReadsCorrectData() throws Exception {
+        CSVReader r = new CSVReader();
+        List<Person> list = r.readAll("data.csv");
 
-        assertEquals("aqeel", people.get(0).getName());
-        assertEquals(27, people.get(0).getAge());
+        assertEquals("aqeel", list.get(0).getName());
+        assertEquals(27, list.get(0).getAge());
+    }
+
+    @Test(expected = Exception.class)
+    public void testReadAllThrowsWhenFileMissing() throws Exception {
+        CSVReader r = new CSVReader();
+        r.readAll("missing-file.csv");
     }
 }
