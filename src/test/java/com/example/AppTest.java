@@ -1,13 +1,12 @@
 package com.example;
 
-import org.junit.Test;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppTest {
 
     @Test
     public void testAppRuns() {
-        // Simple sanity test
-        assertTrue("App should run without issues", true);
+        assertTrue(true, "App should run without issues");
     }
 }
