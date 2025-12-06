@@ -1,0 +1,27 @@
+name: PiTest Mutation Testing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pitest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Run PiTest Mutation Testing
+        run: mvn -B pitest:mutationCoverage
+
+      - name: Upload Mutations Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: pitest-report
+          path: target/pit-reports/
